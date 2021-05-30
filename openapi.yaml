@@ -1,0 +1,125 @@
+---
+openapi: 3.0.3
+info:
+  title: Generated API
+  version: "1.0"
+paths:
+  /:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/TemplateInstance'
+  /api/message:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+      responses:
+        "201":
+          description: Created
+  /api/order:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlaceOrderCommand'
+      responses:
+        "200":
+          description: OK
+  /dashboard/stream:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            text/event-stream:
+              schema:
+                type: array
+                items:
+                  type: string
+components:
+  schemas:
+    CommandItem:
+      type: object
+      properties:
+        item:
+          $ref: '#/components/schemas/Item'
+        name:
+          type: string
+        price:
+          type: number
+    CommandType:
+      enum:
+      - PLACE_ORDER
+      type: string
+    Instant:
+      type: object
+      properties:
+        nanos:
+          format: int32
+          type: integer
+        seconds:
+          format: int64
+          type: integer
+        epochSecond:
+          format: int64
+          type: integer
+        nano:
+          format: int32
+          type: integer
+    Item:
+      enum:
+      - CAKEPOP
+      - CAPPUCCINO
+      - COFFEE_BLACK
+      - COFFEE_WITH_ROOM
+      - CROISSANT
+      - CROISSANT_CHOCOLATE
+      - ESPRESSO
+      - ESPRESSO_DOUBLE
+      - LATTE
+      - MUFFIN
+      type: string
+    Location:
+      enum:
+      - ATLANTA
+      - CHARLOTTE
+      - RALEIGH
+      type: string
+    OrderSource:
+      enum:
+      - COUNTER
+      - WEB
+      type: string
+    PlaceOrderCommand:
+      type: object
+      properties:
+        baristaLineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommandItem'
+        commandType:
+          $ref: '#/components/schemas/CommandType'
+        id:
+          type: string
+        kitchenLineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommandItem'
+        location:
+          $ref: '#/components/schemas/Location'
+        loyaltyMemberId:
+          type: string
+        orderSource:
+          $ref: '#/components/schemas/OrderSource'
+        timestamp:
+          $ref: '#/components/schemas/Instant'
+    TemplateInstance:
+      type: object

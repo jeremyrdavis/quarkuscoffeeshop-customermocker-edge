@@ -108,13 +108,13 @@ public class CustomerMocker {
                 );
                 // not all orders have kitchen items
                 if (desiredNumberOfOrders % 2 == 0) {
-                    placeOrderCommand.getKitchenItems().get().addAll(createKitchenItems());
+                    placeOrderCommand.getKitchenLineItems().get().addAll(createKitchenItems());
                 }
-                if (placeOrderCommand.getBaristaItems().isPresent()) {
-                    counter += placeOrderCommand.getBaristaItems().get().size();
+                if (placeOrderCommand.getBaristaLineItems().isPresent()) {
+                    counter += placeOrderCommand.getBaristaLineItems().get().size();
                 }
-                if (placeOrderCommand.getKitchenItems().isPresent()) {
-                    counter += placeOrderCommand.getKitchenItems().get().size();
+                if (placeOrderCommand.getKitchenLineItems().isPresent()) {
+                    counter += placeOrderCommand.getKitchenLineItems().get().size();
                 }
                 logger.debug("current order count: {}", counter);
                 return placeOrderCommand;

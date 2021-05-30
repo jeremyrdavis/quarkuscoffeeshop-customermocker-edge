@@ -9,48 +9,49 @@ import java.util.*;
 public class PlaceOrderCommand {
 
     private final CommandType commandType = CommandType.PLACE_ORDER;
-    List<OrderLineItem> baristaItems;
-    List<OrderLineItem> kitchenItems;
+    List<OrderLineItem> baristaLineItems;
+    List<OrderLineItem> kitchenLineItems;
     private String id;
-    private String storeId;
+    private String location;
     private OrderSource orderSource;
-    private String rewardsId;
+    private String loyaltyMemberId;
     private BigDecimal total;
 
     public PlaceOrderCommand() {
     }
 
-    public PlaceOrderCommand(String id, String storeId, OrderSource orderSource, String rewardsId, List<OrderLineItem> baristaItems, List<OrderLineItem> kitchenItems, BigDecimal total) {
+    public PlaceOrderCommand(String id, String location, OrderSource orderSource, String loyaltyMemberId, List<OrderLineItem> baristaItems, List<OrderLineItem> kitchenLineItems, BigDecimal total) {
+        this.id = id;
         this.orderSource = orderSource;
-        this.storeId = storeId;
-        this.rewardsId = rewardsId;
-        this.baristaItems = baristaItems;
-        this.kitchenItems = kitchenItems;
+        this.location = location;
+        this.loyaltyMemberId = loyaltyMemberId;
+        this.baristaLineItems = baristaItems;
+        this.kitchenLineItems = kitchenLineItems;
         this.total = total;
     }
 
-    public Optional<String> getRewardsId() {
-        return Optional.ofNullable(rewardsId);
+    public Optional<String> getLoyaltyMemberId() {
+        return Optional.ofNullable(loyaltyMemberId);
     }
 
-    public Optional<List<OrderLineItem>> getBaristaItems() {
-        return Optional.ofNullable(baristaItems);
+    public Optional<List<OrderLineItem>> getBaristaLineItems() {
+        return Optional.ofNullable(baristaLineItems);
     }
 
-    public Optional<List<OrderLineItem>> getKitchenItems() {
-        return Optional.ofNullable(kitchenItems);
+    public Optional<List<OrderLineItem>> getKitchenLineItems() {
+        return Optional.ofNullable(kitchenLineItems);
     }
 
     @Override
     public String toString() {
         return new StringJoiner(", ", PlaceOrderCommand.class.getSimpleName() + "[", "]")
                 .add("commandType=" + commandType)
-                .add("baristaItems=" + baristaItems)
-                .add("kitchenItems=" + kitchenItems)
+                .add("baristaLineItems=" + baristaLineItems)
+                .add("kitchenItems=" + kitchenLineItems)
                 .add("id='" + id + "'")
-                .add("storeId='" + storeId + "'")
+                .add("storeId='" + location + "'")
                 .add("orderSource=" + orderSource)
-                .add("rewardsId='" + rewardsId + "'")
+                .add("rewardsId='" + loyaltyMemberId + "'")
                 .add("total=" + total)
                 .toString();
     }
@@ -61,18 +62,18 @@ public class PlaceOrderCommand {
         if (o == null || getClass() != o.getClass()) return false;
         PlaceOrderCommand that = (PlaceOrderCommand) o;
         return commandType == that.commandType &&
-                Objects.equals(baristaItems, that.baristaItems) &&
-                Objects.equals(kitchenItems, that.kitchenItems) &&
+                Objects.equals(baristaLineItems, that.baristaLineItems) &&
+                Objects.equals(kitchenLineItems, that.kitchenLineItems) &&
                 Objects.equals(id, that.id) &&
-                Objects.equals(storeId, that.storeId) &&
+                Objects.equals(location, that.location) &&
                 orderSource == that.orderSource &&
-                Objects.equals(rewardsId, that.rewardsId) &&
+                Objects.equals(loyaltyMemberId, that.loyaltyMemberId) &&
                 Objects.equals(total, that.total);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(commandType, baristaItems, kitchenItems, id, storeId, orderSource, rewardsId, total);
+        return Objects.hash(commandType, baristaLineItems, kitchenLineItems, id, location, orderSource, loyaltyMemberId, total);
     }
 
     public CommandType getCommandType() {
@@ -83,8 +84,8 @@ public class PlaceOrderCommand {
         return id;
     }
 
-    public String getStoreId() {
-        return storeId;
+    public String getLocation() {
+        return location;
     }
 
     public OrderSource getOrderSource() {
@@ -95,24 +96,24 @@ public class PlaceOrderCommand {
         return total;
     }
 
-    public void setBaristaItems(List<OrderLineItem> baristaItems) {
-        this.baristaItems = baristaItems;
+    public void setBaristaLineItems(List<OrderLineItem> baristaLineItems) {
+        this.baristaLineItems = baristaLineItems;
     }
 
-    public void setKitchenItems(List<OrderLineItem> kitchenItems) {
-        this.kitchenItems = kitchenItems;
+    public void setKitchenLineItems(List<OrderLineItem> kitchenLineItems) {
+        this.kitchenLineItems = kitchenLineItems;
     }
 
-    public void setStoreId(String storeId) {
-        this.storeId = storeId;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public void setOrderSource(OrderSource orderSource) {
         this.orderSource = orderSource;
     }
 
-    public void setRewardsId(String rewardsId) {
-        this.rewardsId = rewardsId;
+    public void setLoyaltyMemberId(String loyaltyMemberId) {
+        this.loyaltyMemberId = loyaltyMemberId;
     }
 
     public void setTotal(BigDecimal total) {

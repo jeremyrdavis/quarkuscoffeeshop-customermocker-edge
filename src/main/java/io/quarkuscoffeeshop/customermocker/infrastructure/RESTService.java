@@ -10,7 +10,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.concurrent.CompletionStage;
 
-@Path("/order")
+@Path("/api/order")
 @RegisterRestClient(configKey="orkey")
 @Produces(MediaType.APPLICATION_JSON)
 public interface RESTService {
