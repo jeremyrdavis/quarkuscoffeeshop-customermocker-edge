@@ -92,7 +92,7 @@ public class CustomerMocker {
                         "ATLANTA",
                         OrderSource.WEB,
                         null,
-                        Arrays.asList(new OrderLineItem(Item.CAPPUCCINO, BigDecimal.valueOf(3.50), "Lemmy")),
+                        Arrays.asList(new OrderLineItem(Item.CAPPUCCINO, BigDecimal.valueOf(3.50), randomCustomerName())),
                         null,
                         BigDecimal.valueOf(3.50)
                 );
@@ -102,13 +102,13 @@ public class CustomerMocker {
                         "ATLANTA",
                         OrderSource.WEB,
                         null,
-                        Arrays.asList(new OrderLineItem(Item.CAPPUCCINO, BigDecimal.valueOf(3.50), "Lemmy")),
+                        Arrays.asList(new OrderLineItem(Item.CAPPUCCINO, BigDecimal.valueOf(3.50), randomCustomerName())),
                         null,
                         BigDecimal.valueOf(3.50)
                 );
                 // not all orders have kitchen items
                 if (desiredNumberOfOrders % 2 == 0) {
-                    placeOrderCommand.getKitchenLineItems().get().addAll(createKitchenItems());
+                    placeOrderCommand.addKitchenLineItem(randomKitchenItem());
                 }
                 if (placeOrderCommand.getBaristaLineItems().isPresent()) {
                     counter += placeOrderCommand.getBaristaLineItems().get().size();
@@ -131,19 +131,12 @@ public class CustomerMocker {
         return beverages;
     }
 
-    private static Collection<OrderLineItem> createKitchenItems() {
-        List<OrderLineItem> kitchenOrders = new ArrayList(2);
-        kitchenOrders.add(new OrderLineItem(randomKitchenItem(), BigDecimal.valueOf(3.75), randomCustomerName()));
-        kitchenOrders.add(new OrderLineItem(randomKitchenItem(), BigDecimal.valueOf(3.5), randomCustomerName()));
-        return kitchenOrders;
+    private static OrderLineItem randomKitchenItem() {
+        return new OrderLineItem(Item.values()[new Random().nextInt(3) + 5], BigDecimal.valueOf(3.75), randomCustomerName());
     }
 
     static Item randomBaristaItem() {
         return Item.values()[new Random().nextInt(5)];
-    }
-
-    static Item randomKitchenItem() {
-        return Item.values()[new Random().nextInt(3) + 5];
     }
 
     static String randomCustomerName() {

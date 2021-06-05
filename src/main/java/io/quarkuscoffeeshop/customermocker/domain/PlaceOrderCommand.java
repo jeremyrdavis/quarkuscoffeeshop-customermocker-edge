@@ -42,6 +42,14 @@ public class PlaceOrderCommand {
         return Optional.ofNullable(kitchenLineItems);
     }
 
+    public void addKitchenLineItem(final OrderLineItem orderLineItem) {
+        if (getKitchenLineItems().isPresent()) {
+            getKitchenLineItems().get().add(orderLineItem);
+        }else {
+            this.kitchenLineItems = Arrays.asList(orderLineItem);
+        }
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", PlaceOrderCommand.class.getSimpleName() + "[", "]")

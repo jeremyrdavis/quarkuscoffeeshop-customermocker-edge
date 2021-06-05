@@ -41,9 +41,8 @@ public class MockerService {
 
     Runnable sendMockOrders = () -> {
         logger.debug("CustomerMocker now running");
-
+        if(!running) logger.info("CustomerMocker now stopping");
         while (running) {
-            if(!running) logger.info("CustomerMocker now stopping");
             try {
                 Thread.sleep(customerVolume.getDelay() * 1000);
                 int orders = new Random().nextInt(4);
