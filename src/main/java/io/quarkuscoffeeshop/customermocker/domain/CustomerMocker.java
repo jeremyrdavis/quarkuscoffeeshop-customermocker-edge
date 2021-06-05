@@ -92,7 +92,7 @@ public class CustomerMocker {
                         "ATLANTA",
                         OrderSource.WEB,
                         null,
-                        Arrays.asList(new OrderLineItem(Item.CAPPUCCINO, BigDecimal.valueOf(3.50), randomCustomerName())),
+                        Arrays.asList(randomBeverage()),
                         null,
                         BigDecimal.valueOf(3.50)
                 );
@@ -102,7 +102,7 @@ public class CustomerMocker {
                         "ATLANTA",
                         OrderSource.WEB,
                         null,
-                        Arrays.asList(new OrderLineItem(Item.CAPPUCCINO, BigDecimal.valueOf(3.50), randomCustomerName())),
+                        Arrays.asList(randomBeverage()),
                         null,
                         BigDecimal.valueOf(3.50)
                 );
@@ -131,8 +131,14 @@ public class CustomerMocker {
         return beverages;
     }
 
+    private static OrderLineItem randomBeverage() {
+        Item item = randomBaristaItem();
+        return new OrderLineItem(item, item.price, randomCustomerName());
+    }
+
     private static OrderLineItem randomKitchenItem() {
-        return new OrderLineItem(Item.values()[new Random().nextInt(3) + 5], BigDecimal.valueOf(3.75), randomCustomerName());
+        Item item = Item.values()[new Random().nextInt(3) + 5];
+        return new OrderLineItem(item, item.price, randomCustomerName());
     }
 
     static Item randomBaristaItem() {
